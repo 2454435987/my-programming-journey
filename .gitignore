@@ -38,3 +38,6 @@ target/
 dist/
 out/
 node_modules/
+
+# Source maps
+*.map
