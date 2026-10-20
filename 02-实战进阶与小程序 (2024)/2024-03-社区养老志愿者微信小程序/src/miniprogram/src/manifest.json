@@ -1,0 +1,30 @@
+{
+  "name": "社区养老志愿者小程序",
+  "appid": "touristappid",
+  "description": "基于Springboot的社区养老志愿者微信小程序",
+  "versionName": "1.0.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "app-plus": {
+    "usingComponents": true
+  },
+  "mp-weixin": {
+    "appid": "touristappid",
+    "setting": {
+      "urlCheck": false,
+      "es6": true,
+      "minified": true
+    },
+    "usingComponents": true
+  },
+  "h5": {
+    "title": "社区养老志愿者平台",
+    "router": {
+      "mode": "hash"
+    },
+    "devServer": {
+      "port": 17700
+    }
+  },
+  "vueVersion": "3"
+}

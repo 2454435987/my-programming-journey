@@ -1,0 +1,102 @@
+{
+  "pages": [
+    {
+      "path": "pages/login/login",
+      "style": { "navigationBarTitleText": "社区养老志愿者平台" }
+    },
+    {
+      "path": "pages/elder/home/home",
+      "style": { "navigationBarTitleText": "老人服务首页" }
+    },
+    {
+      "path": "pages/elder/publish/publish",
+      "style": { "navigationBarTitleText": "发布服务需求" }
+    },
+    {
+      "path": "pages/elder/demands/demands",
+      "style": { "navigationBarTitleText": "我的服务需求" }
+    },
+    {
+      "path": "pages/elder/detail/detail",
+      "style": { "navigationBarTitleText": "需求详情" }
+    },
+    {
+      "path": "pages/elder/sos/sos",
+      "style": { "navigationBarTitleText": "一键紧急求助" }
+    },
+    {
+      "path": "pages/elder/evaluate/evaluate",
+      "style": { "navigationBarTitleText": "服务评价" }
+    },
+    {
+      "path": "pages/elder/messages/messages",
+      "style": { "navigationBarTitleText": "消息通知" }
+    },
+    {
+      "path": "pages/elder/profile/profile",
+      "style": { "navigationBarTitleText": "个人档案" }
+    },
+    {
+      "path": "pages/volunteer/home/home",
+      "style": { "navigationBarTitleText": "志愿者服务首页" }
+    },
+    {
+      "path": "pages/volunteer/register/register",
+      "style": { "navigationBarTitleText": "注册实名认证" }
+    },
+    {
+      "path": "pages/volunteer/tasks/tasks",
+      "style": { "navigationBarTitleText": "社区养老任务" }
+    },
+    {
+      "path": "pages/volunteer/detail/detail",
+      "style": { "navigationBarTitleText": "任务详情" }
+    },
+    {
+      "path": "pages/volunteer/checkin/checkin",
+      "style": { "navigationBarTitleText": "服务签到签退" }
+    },
+    {
+      "path": "pages/volunteer/records/records",
+      "style": { "navigationBarTitleText": "服务记录与积分" }
+    },
+    {
+      "path": "pages/volunteer/messages/messages",
+      "style": { "navigationBarTitleText": "消息通知" }
+    },
+    {
+      "path": "pages/admin/home/home",
+      "style": { "navigationBarTitleText": "管理员工作台" }
+    },
+    {
+      "path": "pages/admin/audit/audit",
+      "style": { "navigationBarTitleText": "档案审核" }
+    },
+    {
+      "path": "pages/admin/elders/elders",
+      "style": { "navigationBarTitleText": "老人信息管理" }
+    },
+    {
+      "path": "pages/admin/demands/demands",
+      "style": { "navigationBarTitleText": "服务需求监管" }
+    },
+    {
+      "path": "pages/admin/tasks/tasks",
+      "style": { "navigationBarTitleText": "志愿任务管理" }
+    },
+    {
+      "path": "pages/admin/stats/stats",
+      "style": { "navigationBarTitleText": "数据统计报表" }
+    },
+    {
+      "path": "pages/admin/messages/messages",
+      "style": { "navigationBarTitleText": "消息推送" }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "社区养老志愿者",
+    "navigationBarBackgroundColor": "#2F7CF6",
+    "backgroundColor": "#F5F7FA"
+  }
+}
