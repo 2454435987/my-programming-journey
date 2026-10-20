@@ -1,0 +1,36 @@
+@charset "UTF-8";
+.msg{
+    width: 100%;
+    border: 1px solid #cccccc;
+    height: 40px;
+    line-height: 40px;
+   text-indent: 10px;
+    box-sizing: border-box;
+    margin: 10px 0;
+}
+.information{
+    margin-left: 50px;
+}
+.information tr td:first-child{
+    text-align: right;
+}
+.information tr td:last-child input{
+    width: 300px;
+    height: 30px;
+ border: 1px solid #cccccc;
+    text-indent: 10px;
+}
+.information tr td:last-child.submit{
+    text-align: center;
+}
+
+.information tr td:last-child.submit input{
+    width: 250px;
+    height: 40px;
+    text-indent: 0px;
+
+    border: none;
+    border-radius: 5px;
+    background-color: #0c81fb;
+    color: white;
+}

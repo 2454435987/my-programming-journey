@@ -1,0 +1,227 @@
+/* banner */
+.banner{
+	position: relative;
+	height: 360px;
+	margin: 20px auto;
+}
+
+.banner #ban1{
+	position: absolute;
+	left: 0px;
+}
+
+.banner #ban2{
+	position: absolute;
+	right: 0px;
+	width: 300px;
+}
+
+
+/* 棰勭害鎸傚彿---鏍囬 */
+.tit{
+	font-size: 20px;
+	color: #888;
+	margin: 30px auto;
+}
+
+.tit span{
+	display: inline-block;
+	width: 140px;
+	height: 40px;
+	font-size: 25px;
+	font-weight: bold;
+	line-height: 40px;
+	text-align: center;
+	color: #fff;
+	background-color: #FF8F2F;
+	border-top-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+	margin-right: 20px;
+}
+
+
+/* 浼橀�夊尰闄�&&涓ラ�夊尰鐢�---閫氱敤鏍峰紡 */
+.recommend>p{
+	position: relative;
+	padding: 15px;
+}
+
+.recommend>p>span{
+	font-size: 35px;
+}
+
+.recommend>p>a{
+	position: absolute;
+	top: 20px;
+	right: 0px;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 60px;
+	margin-right: 20px;
+	color: #09a6fa;
+}
+
+.recommend>p:hover a{
+	animation: slideRight .5s linear forwards;
+}
+
+@keyframes slideRight {
+  0% {
+    right: 0px;
+	opacity: 1;
+  }
+  50% {
+    right: -55px;
+	opacity: 0;
+  }
+  100% {
+    right: 0px;
+	opacity: 1;
+  }
+}
+
+.recommend>div{
+	padding-top: 20px;
+	border-top: 3px solid #09a6fa;
+	margin-bottom: 50px;
+}
+
+.recommend table{
+	width: 100%;
+	line-height: 30px;
+	text-align: center;
+	padding: 30px;
+	box-shadow: 0px 0px  5px #ccc;
+}
+
+.recommend tr{
+	display: flex;
+	justify-content: space-around;
+}
+
+.recommend td{
+	width: 230px;
+	box-shadow: 0px 0px  5px #ccc;
+}
+
+.recommend td p{
+	display: -webkit-box; /* 使用弹性盒子布局 */
+	overflow: hidden; /* 超出部分隐藏 */
+	-webkit-line-clamp: 3; /* 指定文本行数为3行 */
+	-webkit-box-orient: vertical; /* 设置文本垂直方向排列 */
+	text-overflow: ellipsis; /* 结尾处显示省略号 */
+}
+
+
+/* 浼橀�夊尰闄� */
+.hospital td{
+	height: 240px;
+	overflow: hidden;
+	transition: .5s;
+}
+
+.hospital td a{
+	color: #000;
+}
+
+.hospital td:hover{
+	border-radius: 10px;
+	box-shadow: 1px 1px 10px #666;
+	transform: scale(1.1,1.1);
+}
+
+
+.hospital img{
+	display: block;
+	width: 230px;
+	height: 170px;
+	margin: auto;
+}
+
+.hospital td div{
+	position: relative;
+	top: 5px;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	background-color: #fff;
+	transition: .5s;
+}
+
+.hospital td:hover div{
+	top: -120px;
+}
+
+.hospital td p{
+	padding: 0px 20px;
+}
+
+.hospital td p:first-child{
+	padding: 0px 20px;
+	font-weight: bold;
+	overflow: hidden;
+	white-space: nowrap; /* 禁止文字换行 */
+	text-overflow: ellipsis; /* 结尾处显示省略号 */
+}
+
+.hospital span{
+	font-size: 20px;
+	font-weight: bold;
+	color: #ff6c23;
+}
+
+
+/* 涓ラ�夊尰鐢� */
+.doctor td{
+	position: relative;
+	height: 300px;
+	padding: 10px;
+	transition: .5s;
+}
+
+.doctor td:hover{
+	border-radius: 10px;
+	box-shadow: 0px 0px  10px #666;
+	transform: scale(1.1,1.1);
+}
+
+.doctor img{
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+}
+
+.doctor h4 span{
+	color: #09a6fa;
+}
+
+.doctor p{
+	padding: 0px 8px;
+}
+
+.doctor .p1{
+	padding-bottom: 5px;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+.doctor a{
+	position: absolute;
+	bottom: 0px;
+	left: 10px;
+	display: block;
+	width: 100px;
+	height: 35px;
+	font-size: 15px;
+	line-height: 35px;
+	text-align: center;
+	border-radius: 5px;
+	color: #09a6fa;
+	border: 1px solid #09a6fa;
+	margin: 20px;
+	transition: .5s;
+}
+
+.doctor a:hover{
+	color: #fff;
+	background-color: #09a6fa;
+}

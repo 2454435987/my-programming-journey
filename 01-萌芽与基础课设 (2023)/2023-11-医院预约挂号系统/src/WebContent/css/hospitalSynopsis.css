@@ -1,0 +1,248 @@
+
+/*医院信息展示部分 */
+.banner{
+    width: 100%;
+    height: 150px;
+    margin: 50px;
+}
+.banner .img_box{
+    width: 200px;
+    height: 150px;
+    float: left;
+}
+.banner .img_box img{
+    width: 100%;
+    height: 100%;
+}
+.banner .information{
+    float: left;
+    margin-left: 20px;
+}
+.banner .information h2,p{
+    margin-top: 15px;
+}
+
+.banner .information .address{
+    color: #666;
+}
+/* span样式设置 */
+.banner p>span{
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #FE8011;
+    border: 1px solid #FE8011;
+    border-radius: 5px;
+    /*margin: 0px 10px;*/
+    margin-right: 10px;
+}
+/*简介和门诊科室标题样式*/
+.title{
+    margin-left: 50px;
+}
+.title div{
+    display: inline-block;
+    width: 110px;
+    height: 30px;
+    color: #4f89c8;
+    margin-right: 10px;
+    border: 1px solid #4f89c8;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 5px;
+}
+.title .act{
+    background-color: #4f89c8;
+    color: white;
+}
+/*分割线*/
+.hr{
+    width: 100%;
+    background-color: #4f89c8;
+    height: 2px;
+    margin:50px 0;
+}
+
+/*简介部分*/
+.contentBox{
+    margin-left: 50px;
+    margin-bottom: 50px;
+}
+/*门诊部分*/
+.departmentBox{
+   /*display: flex;*/
+    position: relative;
+    display: none;
+    /*height: 1000px;*/
+    margin-bottom: 100px;
+    /*border:1px solid red;*/
+}
+.departmentBox .left_right{
+    display: flex;
+}
+.departmentBox .departmentType{
+    padding-left: 50px;
+    /*border-bottom: 2px solid #cccccc;*/
+    margin-bottom: 50px;
+}
+.departmentBox .departmentType span{
+    display: inline-block;
+    margin-left: 20px;
+    width: 55px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+}
+.departmentBox .departmentType span.act{
+background-color: #4782c5;
+    color: white;
+}
+
+/*左边医生板块*/
+.departmentBox .left{
+    display: inline-block;
+    width: 70%;
+    height: 100px;
+    border-top: 2px solid #4f89c8;
+    border-left: 2px solid #f3f3f2;
+    position: relative;
+}
+.departmentBox .left .leftBox{
+    height: 200px;
+    border-left: 2px solid #cccccc;
+    border-bottom:  2px solid #cccccc;
+    border-right:  2px solid #cccccc;
+    display: flex;
+}
+.departmentBox .left .leftBox  .img_box{
+    width: 125px;
+    height: 125px;
+    border-radius: 75px;
+    overflow: hidden;
+    margin: 37px 25px;
+}
+.departmentBox .left .leftBox  .img_box img{
+    width: 100%;
+    height: 100%;
+}
+.departmentBox .left .leftBox  .information{
+    width: 60%;
+    display: inline-block;
+}
+.departmentBox .left .leftBox  .information .goodAt{
+    /*使用弹性盒子布局*/
+    display: -webkit-box;
+    /*超出部分隐藏*/
+    overflow: hidden;
+    /*指定文本行数为2行*/
+    -webkit-line-clamp: 2;
+    /*设置文本垂直方向排列*/
+    -webkit-box-orient: vertical;
+    /*结尾处显示省略号*/
+    text-overflow: ellipsis;
+}
+.departmentBox .left .leftBox  .information .professional{
+    /*使用弹性盒子布局*/
+    display: -webkit-box;
+    /*超出部分隐藏*/
+    overflow: hidden;
+    /*指定文本行数为4行*/
+    -webkit-line-clamp: 4;
+    /*设置文本垂直方向排列*/
+    -webkit-box-orient: vertical;
+    /*结尾处显示省略号*/
+    text-overflow: ellipsis;
+}
+
+.departmentBox .left .leftBox  .information p{
+    font-size: 12px;
+    /*margin-bottom: 5px;*/
+    margin: 0;
+    margin-bottom: 5px;
+}
+.departmentBox .left .leftBox  .information .doctorName{
+    margin-top: 10px;
+font-size: 20px;
+}
+.departmentBox .left .leftBox  .information .doctorName span{
+    font-size: 15px;
+}
+
+     /*预约部分*/
+.departmentBox .left .leftBox  .book{
+    width: 20%;
+    border-left:1px solid #cccccc;
+    height: 80%;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    margin-left: 20px;
+    display: flex;
+}
+.departmentBox .left .leftBox  .book a{
+    align-self: center;
+    justify-self: center;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 30px;
+    color: white;
+    background-color: #4f89c8;
+    border-radius: 5px;
+}
+     /*右边名医推荐板块*/
+.departmentBox .right{
+    display: inline-block;
+    width: 20%;
+    /*float: right;*/
+    border: 1px solid #ccc;
+    margin-left: 100px;
+    padding-left: 10px;
+    padding-top: 10px;
+    height: 830px;
+    /*padding-bottom: 30px;*/
+}
+/*头像部分*/
+.departmentBox .right .rightBox{
+    width: 95%;
+    height: 80px;
+    display: flex;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    border-top: 1px solid #cccccc;
+    padding-top: 20px;
+}
+.departmentBox .right .rightBox .img_box{
+    /*width: 30%;*/
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+    border-radius: 50px;
+}
+.departmentBox .right .rightBox .img_box img{
+    width: 100%;
+    height: 100%;
+}.departmentBox .right .rightBox p,span{
+    font-size: 12px;
+    margin: 0;
+    margin-bottom: 5px;
+ }
+.departmentBox .right .rightBox .doctorName{
+    font-size: 15px;
+}
+.departmentBox .right .rightBox .information{
+    width: 60%;
+    margin-left: 10px;
+}
+.departmentBox .right .rightBox .information a{
+    display: inline-block;
+    width: 80px;
+    height: 20px;
+    background-color: #4f89c8;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 5px;
+}

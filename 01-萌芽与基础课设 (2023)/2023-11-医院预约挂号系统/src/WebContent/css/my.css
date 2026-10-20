@@ -1,0 +1,425 @@
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+}
+
+.wrap{
+	width: 1200px;
+	margin: auto;
+}
+
+
+
+.top{
+	height: 80px;
+	box-shadow: 0px 0px 5px #ccc;
+}
+
+.top img{
+	float: left;
+	margin: 10px 20px;
+}
+
+.top span{
+	font-size: 30px;
+	line-height: 80px;
+	text-align: center;
+	font-weight: bold;
+	color: #1381e8;
+	margin: 0px 250px 0px 250px;
+}
+
+.top a{
+	display: inline-block;
+	width: 100px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 3px;
+	color: #fff;
+	background-color: #1381e8;
+	opacity: .8;
+	transition: .5s;
+}
+
+.top a:hover{
+	opacity: 1;
+}
+
+
+
+.main{
+	height: 600px;
+	margin: 30px 0px;
+}
+
+.left_nav{
+	float: left;
+	width: 23%;
+	height: 100%;
+	text-align: center;
+	box-shadow: 0px 0px 5px 2px #ccc;
+}
+
+#tx{
+	display: block;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	box-sizing: border-box;
+	margin: 20px auto 10px;
+	transition: .3s;
+}
+
+#tx:hover{
+	box-shadow: 0px 0px 8px 3px #ccc;
+	transform: scale(1.1);
+}
+
+.tab>li{
+	margin: 50px ;
+	border-radius: 5px;
+	transition: .6s;
+}
+
+.tab>li.active{
+	box-shadow: 0px 0px 2px 2px #ccc;
+}
+
+.tab>li a{
+	font-size: 30px;
+	color: #535353;
+}
+
+.tab>li.active a{
+	font-weight: bold;
+	color: #1381e8;
+}
+
+
+
+.right_main>div{
+	display: none;
+}
+
+.right_main>div.active{
+	display: block;
+}
+
+
+
+
+.right_main{
+	float: right;
+	width: 75%;
+	height: 100%;
+	box-shadow: 0px 0px 5px 2px #ccc;
+}
+
+.right_main>div table {
+	position: relative;
+	top: -50px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.right_main>div>p{
+	font-size: 40px;
+	font-weight: bold;
+	margin: 20px 30px;
+}
+
+.right_main>div table{
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.right_main>div table input{
+	position: relative;
+	top: -15px;
+	width: 300px;
+	height: 30px;
+	font-size: 25px;
+	padding-left: 10px;
+	margin-top: 30px;
+}
+
+.right_main>div span>input{
+	width: 150px;
+	height: 35px;
+	font-size: 20px;
+	outline: none;
+	border: none;
+	border-radius: 2px;
+	color: #fff;
+	background-color: #1381e8;
+	margin-left: 30px;
+}
+
+
+
+/* 订单中心 */
+#one span{
+	margin: 10px 150px;
+	/*border: 1px solid red;*/
+
+}
+
+#one span a {
+	display: inline-block;
+	font-size: 25px;
+	text-align: center;
+	color: #000;
+	padding: 0px 15px 5px;
+	margin: 0px 5px;
+	border-bottom: 5px solid transparent; /* 初始状态下底部边框透明 */
+	transition: border-bottom .8s; /* 添加过渡效果 */
+}
+
+#one span a.active {
+	font-weight: bold;
+	border-bottom: 5px solid #1381e8; /* 底部边框样式 */
+}
+
+#one table{
+    width: 750px;
+	margin: 50px 80px 0px;
+}
+
+#one table tr{
+	transition: .3s;
+}
+
+#one table tr td{
+	display: inline-block;
+	width: 100px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	padding: 5px 0px;
+}
+
+#one table .tit>td{
+	color: #1381e8;
+	margin: 0px 10px;
+}
+
+#one table .list>td{
+	font-size: 16px;
+	font-weight: 100;
+	margin: 5px 10px;
+}
+
+#one table .list:hover{
+	background-color: #eeeeee;
+}
+
+#one table .list button{
+	position: relative;
+	top: 3px;
+	width: 60px;
+	font-size: 20px;
+	text-align: center;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	color: #fff;
+	background-color: #7EA0D3;
+	padding-right: 8px;
+}
+
+
+
+
+#two table{
+	margin: 80px 80px 0px;
+}
+
+#two table input{
+	border: none;
+	outline: none;
+	pointer-events: none;
+	box-sizing: border-box;
+}
+
+#two form>span{
+	display: block;
+	margin: 20px 80px;
+	visibility: hidden;
+}
+
+#two #bj{
+	position: relative;
+	top: 20px;
+	left: 700px;
+	display: block;
+	width: 180px;
+	height: 35px;
+	font-size: 20px;
+	line-height: 35px;
+	text-align: center;
+	border-radius: 3px;
+	color: #fff;
+	background-color: #1381e8;
+}
+
+
+
+#three table,#four table{
+	margin: 100px 80px 0px;
+}
+
+#three tr,#four tr{
+	display: block;
+	margin-left: 120px;
+}
+
+#three span,#four span{
+	display: block;
+	margin: 0px 220px;
+}
+
+
+/* ======更换头像====== */
+.box{
+	opacity: 0;
+	visibility: hidden;
+	position: absolute;
+	z-index: 100;
+	top: 50%;
+	left: 50%;
+	width: 500px;
+	height: 500px;
+	text-align: center;
+	border: 2px solid #ccc;
+	border-radius: 10px;
+	box-shadow: 0px 0px 20px 3px #ccc;
+	background-color: #fff;
+	transform: translate(-50%,-50%);
+	transition: 1s;
+}
+
+.box.show{
+	opacity: 1;
+	visibility: visible;
+}
+
+.box h2{
+	position: absolute;
+	top: 30px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.box .xx{
+	position: absolute;
+	top: 0px;
+	right: 20px;
+	font-size: 50px;
+	font-weight: bold;
+}
+
+.box .file-upload {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 60px;
+}
+
+.box .file-upload-input {
+	display: none;
+}
+
+.box .file-upload-label {
+	display: flex;
+	justify-content: center;
+	border: 5px dashed #87CEFA;
+	border-radius: 5px;
+	width: 250px;
+	height: 250px;
+	font-size: 30px;
+	align-items: center;
+	color: #87CEFA;
+	margin-top: 35px;
+	transition: .5s;
+	/* 设置背景图片的样式 */
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.box .file-upload-label:hover{
+	color: #416679;
+	border: 5px dashed #416679;
+}
+
+.box .file-upload-label .icon{
+	font-size: 80px;
+}
+
+.box input[type="submit"]{
+	width: 200px;
+	height: 40px;
+	font-size: 23px;
+	border: none;
+	border-radius: 3px;
+	color: #fff;
+	background-color: #1381e8;
+	margin-top: 50px;
+}
+
+
+/* 订单详情 */
+.particulars{
+	opacity: 0;
+	visibility: hidden;
+	position: absolute;
+	z-index: 100;
+	top: 50%;
+	left: 50%;
+	width: 450px;
+	border: 2px solid #ccc;
+	border-radius: 10px;
+	box-shadow: 0px 0px 20px 3px #ccc;
+	background-color: #fff;
+	transform: translate(-50%,-50%);
+	transition: .3s;
+}
+
+.particulars.show{
+	opacity: 1;
+	visibility: visible;
+}
+
+.particulars h2{
+	position: absolute;
+	top: 30px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.particulars .xx{
+	position: absolute;
+	top: 0px;
+	right: 20px;
+	font-size: 50px;
+	font-weight: bold;
+}
+
+.particulars div{
+	margin: 80px 0px 20px;
+	padding: 10px 50px;
+}
+
+.particulars p{
+	font-size: 20px;
+	line-height: 40px;
+}
+
+.particulars p>span{
+	display: inline-block;
+	width: 100px;
+}

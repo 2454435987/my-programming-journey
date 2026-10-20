@@ -1,0 +1,145 @@
+
+.maxbox{
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.header{
+    width: 100%;
+    height: 130px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #f6f6f6;
+    margin-top: 10px;
+}
+
+.photo{
+    width: 100px;
+    height: 100px;
+    margin-right: 50px;
+    align-self: start;
+    margin: 10px;
+    border-radius: 100px;
+    overflow: hidden;
+    text-align: left;
+}
+
+.photo img{
+    width: 100px;
+}
+
+.info{
+	margin-top: 15px;
+	margin-left: 10px;
+}
+
+.info div{
+    margin-top: 10px;
+}
+
+.info h3{
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.info #sc{
+	width: 1000px;
+    color: #a6a6a6;
+    font-size: 14px;
+    /*----------------------------------*/
+    display: -webkit-box; /* 使用弹性盒子布局 */
+	overflow: hidden; /* 超出部分隐藏 */
+	-webkit-line-clamp: 1; /* 指定文本行数为3行 */
+	-webkit-box-orient: vertical; /* 设置文本垂直方向排列 */
+	text-overflow: ellipsis; /* 结尾处显示省略号 */
+}
+
+/*content閮ㄥ垎*/
+.content{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.left{
+    width:75%;
+    position: relative;
+}
+
+.left .box{
+    width: 100%;
+    background-color: #f6f6f6;
+    padding: 10px;
+    margin-top: 10px;
+}
+.left .box p{
+	position: relative;
+	height: 40px;
+	line-height: 40px;
+}
+
+.left .box p:not(:last-child) {
+	border-bottom:3px white solid;
+	margin-bottom: 10px;
+}
+
+.left .box p span{
+	margin-right: 5px;
+}
+
+.left .box p .btn{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 80px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    background-color: #4c93eb;
+}
+
+
+.right{
+	position: relative;
+    width: 250px;
+}
+
+.right .box{
+	position: absolute;
+	top: 35px;
+    width: 250px;
+    height: 330px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+}
+
+.right .box h4{
+	height: 40px;
+    line-height: 40px;
+	text-align: center;
+    background-color: #f3f3f3;
+}
+
+.right .box p{
+    text-indent: 20px;
+    line-height: 22px;
+    margin-bottom: 15px;
+    padding: 0px 5px 0px 10px;
+}
+
+
+.text{
+	margin: 20px 0px;
+}
+
+.text h3{
+    margin: 30px 0px 10px;
+}
+
+.text p{
+	text-indent: 40px;
+	line-height: 30px;
+}
