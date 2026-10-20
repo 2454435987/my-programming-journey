@@ -1,0 +1,28 @@
+{
+  "name": "茶文化",
+  "appid": "touristappid",
+  "description": "茶文化主题App",
+  "versionName": "1.0.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "app-plus": {
+    "usingComponents": true,
+    "nvueStyleCompiler": "uni-app",
+    "compilerVersion": 3
+  },
+  "quickapp": {},
+  "mp-weixin": {
+    "appid": "touristappid",
+    "setting": {
+      "urlCheck": false
+    },
+    "usingComponents": true
+  },
+  "h5": {
+    "title": "茶文化",
+    "router": {
+      "mode": "hash",
+      "base": "/"
+    }
+  }
+}
