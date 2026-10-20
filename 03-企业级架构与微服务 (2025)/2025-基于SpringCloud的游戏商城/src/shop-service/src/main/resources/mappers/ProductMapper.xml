@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.dao.ProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.baidu.pojo.Product">
+        <id column="pid" property="pid" />
+        <result column="pname" property="pname" />
+        <result column="price" property="price" />
+        <result column="pfile" property="pfile" />
+        <result column="description" property="description" />
+        <result column="stock" property="stock" />
+        <result column="uid" property="uid" />
+        <result column="audit_status" property="auditStatus" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="sales" property="sales" />
+    </resultMap>
+
+<!--    <select id="getProductPageByPname" resultMap="BaseResultMap">-->
+<!--        select * from t_product-->
+<!--        <where>-->
+<!--            <if test="pname!=null and pname!=''">-->
+<!--                pname like concat('%',#{pname},'%')-->
+<!--            </if>-->
+<!--        </where>-->
+<!--        limit #{start},#{pageSize}-->
+<!--    </select>-->
+
+</mapper>

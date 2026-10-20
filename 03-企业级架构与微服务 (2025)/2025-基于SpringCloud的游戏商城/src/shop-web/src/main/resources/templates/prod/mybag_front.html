@@ -1,0 +1,178 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>我的背包 - 聚宝阁</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" th:href="@{/layuiadmin/layui/css/layui.css}" href="/static/layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" th:href="@{/layuiadmin/style/admin.css}" href="/static/layuiadmin/style/admin.css" media="all">
+  <style>
+    .layui-table-cell .layui-form-checkbox[lay-skin="primary"] {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  </style>
+</head>
+
+<body>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <div th:replace="~{navTop :: topNav(activeTab='bag')}"></div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-col-md8 layui-col-md-offset2">
+  <div class="layui-card">
+    <div class="layui-card-body layui-form">
+      <!-- 异步方式生成表格体 -->
+      <table id="LAY-app-content-list" lay-filter="LAY-app-content-list" class="layui-hide">
+      </table>
+
+      <!--工具栏-->
+      <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+          <button class="layui-btn layui-btn-primary layuiadmin-btn-list" style="border: 1px solid #c2c2c2; color: #666; font-weight: bold;">
+            <i class="layui-icon layui-icon-user"></i> 欢迎来到您的私人聚宝阁背包
+          </button>
+          <button class="layui-btn layui-btn-warm" lay-event="mergeBag" style="float: right;">
+            <i class="layui-icon layui-icon-app"></i> 一键合并同类物品
+          </button>
+        </div>
+      </script>
+
+      <!--表格右侧的操作列-->
+      <script type="text/html" id="table-content-list">
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="view"><i class="layui-icon layui-icon-search"></i>鉴赏</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="sell"><i class="layui-icon layui-icon-rmb"></i>挂售</a>
+      </script>
+
+    </div>
+  </div>
+</div>
+
+<script th:src="@{/layuiadmin/layui/layui.js}" src="/static/layuiadmin/layui/layui.js"></script>
+<script type="text/javascript">
+  layui.config({
+    base: '/layuiadmin/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use(['index', 'table'], function(){
+    var table = layui.table
+            ,form = layui.form
+            ,layer = layui.layer
+            ,$ = layui.jquery;
+
+    layer.ready(function (){
+      tableRender(table);
+    });
+
+    // 监听头部工具栏事件
+    table.on('toolbar(LAY-app-content-list)', function(obj){
+      if(obj.event === 'mergeBag'){
+        layer.confirm('是否要将背包中所有相同的物品堆叠在一起？', {title:'整理背包'}, function(index){
+          $.post('/prod/mergeBag', {}, function(res){
+            if(res.code === 0){
+              layer.msg('背包整理完毕，物品已合并堆叠！', {icon:1});
+              table.reload('LAY-app-content-list');
+            }else{
+              layer.msg('整理失败', {icon:2});
+            }
+          });
+          layer.close(index);
+        });
+      }
+    });
+
+    //监听行内操作列按钮
+    table.on('tool(LAY-app-content-list)', function(obj){
+      if(obj.event == 'view') {
+        // 跳转到商品详情页鉴赏
+        window.open('/prod/getProdById/' + obj.data.pid, '_blank');
+      } else if(obj.event == 'sell') {
+        // 获取当前点击的商品数据
+        var data = obj.data;
+
+        // 使用 layer.open 弹出一个自定义的表单
+        layer.open({
+          type: 1,
+          title: '挂售饰品：' + data.pname,
+          area: ['350px', '280px'], // 弹窗宽高
+          // 自定义 HTML：包含【单价】和【数量】两个输入框
+          content: '<div style="padding: 20px;">' +
+                  '  <label>设置挂售单价：</label>' +
+                  '  <input type="number" id="sellPrice" value="' + data.price + '" class="layui-input" style="margin-bottom: 15px;">' +'  <label>挂售数量 (您拥有 ' + data.stock + ' 件)：</label>' +'  <input type="number" id="sellQuantity" value="1" max="' + data.stock + '" min="1" class="layui-input">' +'</div>',
+          btn: ['确定挂售', '取消'],
+          yes: function(index, layero) {
+            // 获取玩家输入的两个值
+            var price = $('#sellPrice').val();
+            var quantity = $('#sellQuantity').val();
+
+            // 校验单价
+            if (isNaN(price) || price <= 0) {
+              layer.msg("请输入合法的挂售单价！", {icon: 2});
+              return;
+            }
+
+            // 校验数量 (不能小于1，不能大于库存，且必须是整数)
+            if (isNaN(quantity) || quantity < 1 || quantity > data.stock || quantity % 1 !== 0) {
+              layer.msg("挂售数量必须在 1 到 " + data.stock + " 之间！", {icon: 2});
+              return;
+            }
+
+            // 校验通过，发送 Ajax 请求到后台
+            $.post('/prod/sellProduct', {
+              pid: data.pid,
+              sellPrice: price,
+              sellQuantity: quantity
+            }, function(res) {
+              if (res.code === 0) { // 假设成功返回 code 为 0
+                layer.msg('挂售成功！已提交到交易大厅', {icon: 1});
+                layer.close(index); // 关闭弹窗
+
+                // 刷新背包表格，注意把 'ID-table-demo' 换成您自己背包 table 的真实 ID
+                table.reload('ID-table-demo');
+              } else {
+                layer.msg(res.msg || '挂售失败，请稍后再试', {icon: 2});
+              }
+            });
+          }
+        });
+      }
+    });
+
+  });
+
+  function tableRender(table) {
+    table.render({
+      elem: '#LAY-app-content-list'  // 指定渲染的table的id属性
+      ,url: '/prod/getMyBagData'  // 渲染的数据来源：获取背包数据
+      ,page: true  // 开启自带分页
+      ,limits: [5,10,20,50]  
+      ,limit: 5 //每页默认显示的数量
+      ,layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'] // 分页栏的顺序
+      ,method: 'post'  //提交方式
+      ,request: {pageName: 'page', limitName: 'limit'}  // 要对应请求处理方法中的参数名称
+      ,toolbar: '#toolbarDemo' //开启头部工具栏
+      ,cellMinWidth: 80
+      ,title: '私人背包'
+      ,cols: [ [ 
+         {field:'pid', title:'道具编号', width:120, sort:'true'}
+        ,{
+          title:'道具外观',
+          width:150,
+          templet:function (d) {
+              return '<img style="height:40px;" src="'+d.pfile+'"/>'
+          }
+         }
+        ,{field:'pname', title:'道具名称', width:150, style:'color: #d84c29; font-weight: bold;'}
+        ,{field:'description', title:'道具描述', width:250}
+        ,{field:'price', title:'商品单价', width:150}
+        ,{field:'stock', title:'持有数量', width:100}
+        ,{field:'createTime', title:'入库时间', width:200}
+        ,{fixed: 'right', title:'操作', toolbar: '#table-content-list', width:200}
+      ] ]
+    });
+  }
+</script>
+</div></div></body>
+</html>

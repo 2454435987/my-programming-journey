@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <!-- 前台公共导航栏，接收一个 activeTab 参数控制高亮 -->
+    <div th:fragment="topNav(activeTab)" class="layui-row">
+        <!-- 引入全局琉璃金/祥云白聚宝阁样式 -->
+        <style>
+            body {
+                background-color: #f8f9fa !important; /* 祥云白底色 */
+                color: #333333 !important; /* 深灰色正文，保证明亮下的可读性 */
+            }
+            .layui-card { background: #ffffff !important; box-shadow: 0 2px 10px rgba(0,0,0,0.05) !important; }
+            .layui-card-body { color: #333333; }
+            
+            /* 导航栏样式覆盖 */
+            .layui-nav {
+                background-color: #ffffff !important;
+                border: 1px solid #eeeeee;
+                border-radius: 4px;
+            }
+            .layui-nav .layui-nav-item a { color: #555555 !important; }
+            .layui-nav .layui-nav-item a:hover { color: #c59b27 !important; }
+            .layui-nav .layui-this:after, .layui-nav-bar {
+                background-color: #c59b27 !important; /* 琉璃金高亮底边 */
+            }
+            .layui-nav .layui-this a { color: #c59b27 !important; font-weight: bold; }
+
+            /* 全局分页器样式覆盖 */
+            .layui-laypage a, .layui-laypage span {
+                background-color: #ffffff !important;
+                color: #555555 !important;
+                border-color: #e2e2e2 !important;
+            }
+            .layui-laypage .layui-laypage-curr .layui-laypage-em {
+                background-color: #c59b27 !important; /* 琉璃金分页高亮 */
+            }
+            
+            /* 全局表格样式覆盖 (针对购物车、背包、订单) */
+            .layui-table, .layui-table-view {
+                background-color: #ffffff !important;
+                color: #333333 !important;
+                border-color: #e2e2e2 !important;
+            }
+            .layui-table-header { border-color: #e2e2e2 !important; background-color: #fafafa !important;}
+            .layui-table th {
+                background-color: #fafafa !important;
+                color: #c59b27 !important;
+                font-weight: bold;
+                border-color: #e2e2e2 !important;
+            }
+            .layui-table td, .layui-table-cell {
+                border-color: #e2e2e2 !important;
+            }
+            .layui-table tbody tr:hover, .layui-table-hover {
+                background-color: #fffbf0 !important; /* 悬浮时带有一丝极淡的金黄色 */
+            }
+            .layui-table-tool { background-color: #fafafa !important; border-color: #e2e2e2 !important; }
+            
+            /* 文本框样式覆盖 */
+            .layui-input, .layui-textarea {
+                background-color: #ffffff !important;
+                color: #333333 !important;
+                border-color: #cccccc !important;
+            }
+            .layui-input:focus, .layui-textarea:focus {
+                border-color: #c59b27 !important;
+            }
+            
+            /* 面板/弹窗统一样式 */
+            .layui-layer {
+                background-color: #ffffff !important;
+                border: 1px solid #c59b27 !important;
+                box-shadow: 0 4px 20px rgba(197,155,39,0.15) !important;
+            }
+            .layui-layer-title {
+                background-color: #fffbf0 !important;
+                color: #c59b27 !important;
+                border-bottom: 1px solid #e2e2e2 !important;
+                font-weight: bold;
+            }
+            .layui-layer-content { color: #333333 !important; }
+            
+            /* 文字排版 */
+            h1, h2, h3, h4, h5, h6 { color: #222222 !important; }
+        </style>
+        
+        <div class="layui-col-md10 layui-col-md-offset1">
+            <div class="layui-card" style="box-shadow: none; border: none;">
+                <div class="layui-card-body" style="padding:0px; margin:0px;margin-bottom:10px;">
+                    <ul class="layui-nav" lay-filter="component-nav">
+                        <li class="layui-nav-item" th:classappend="${activeTab == 'home'} ? 'layui-this' : ''">
+                            <a th:href="@{/prod/index.html}">首页</a>
+                        </li>
+                        <li class="layui-nav-item" th:classappend="${activeTab == 'bag'} ? 'layui-this' : ''" th:if="${session.user1 != null}">
+                            <a th:href="@{/prod/toMyBagFront}">我的背包</a>
+                        </li>
+                        <li class="layui-nav-item" th:classappend="${activeTab == 'listed'} ? 'layui-this' : ''" th:if="${session.user1 != null}">
+                            <a th:href="@{/prod/toMyListedFront}">我的挂售</a>
+                        </li>
+                        <li class="layui-nav-item" th:classappend="${activeTab == 'collect'} ? 'layui-this' : ''" th:if="${session.user1 != null}">
+                            <a th:href="@{/collect/toCollectFront}">我的收藏</a>
+                        </li>
+                        <li class="layui-nav-item" th:classappend="${activeTab == 'cart'} ? 'layui-this' : ''">
+                            <a th:href="@{/cart/showcartList}">购物车</a>
+                        </li>
+                        <li class="layui-nav-item" th:classappend="${activeTab == 'user'} ? 'layui-this' : ''">
+                            <a th:href="@{/toUserIndex}">个人中心</a>
+                        </li>
+
+
+                        <li class="layui-nav-item" th:classappend="${activeTab == 'login'} ? 'layui-this' : ''">
+                            <a th:href="@{/user/toUserLogin}">用户登录</a>
+                        </li>
+                        <li class="layui-nav-item" th:classappend="${activeTab == 'admin'} ? 'layui-this' : ''">
+                            <a th:href="@{/user/toLogin}">后台管理</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>我的收藏</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layuiadmin/layui/css/layui.css}" href="/static/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" th:href="@{/layuiadmin/style/admin.css}" href="/static/layuiadmin/style/admin.css" media="all">
+    <style>
+        .layui-table-cell { height: auto; }
+    </style>
+</head>
+
+<body>
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-body layui-form">
+            <!-- 异步方式生成表格体 -->
+            <table id="LAY-app-content-list" lay-filter="LAY-app-content-list" class="layui-hide">
+            </table>
+
+            <!-- 表格右侧的操作列 -->
+            <script type="text/html" id="table-content-list">
+                <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="view"><i class="layui-icon layui-icon-search"></i>查看商品</a>
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>取消收藏</a>
+            </script>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/layuiadmin/layui/layui.js}" src="/static/layuiadmin/layui/layui.js"></script>
+<script type="text/javascript">
+    layui.config({
+        base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'table'], function(){
+        var table = layui.table
+            ,form = layui.form
+            ,layer = layui.layer
+            ,$ = layui.jquery;
+
+        layer.ready(function (){
+            tableRender(table);
+        });
+
+        //监听行内操作列按钮
+        table.on('tool(LAY-app-content-list)', function(obj){
+            if(obj.event === 'del') {
+                layer.confirm('确认要取消收藏吗？', {
+                    btn : [ '确定', '取消' ]//按钮
+                }, function(index) {
+                    $.ajax({
+                        type: 'post',
+                        url: '/collect/toggle', // 复用已有的 toggle 接口，再次调用就是取消收藏
+                        data: { pid: obj.data.pid },
+                        success: function(data){
+                            if(data.code === 0){
+                                tableRender(layui.table);
+                                layer.msg('取消收藏成功', { time: 1000 });
+                            }else {
+                                layer.msg('操作失败', { time: 1000 });
+                            }
+                        }
+                    });
+                });
+            } else if(obj.event === 'view') {
+                // 打开新窗口查看商品详情
+                window.open('/prod/getProdById/' + obj.data.pid);
+            }
+        });
+    });
+
+    function tableRender(table) {
+        table.render({
+            elem: '#LAY-app-content-list'  // 指定渲染的table的id属性
+            ,url: '/collect/list'  // 渲染的数据来源
+            ,page: true  // 开启自带分页
+            ,limits: [2,5,10,20,50]
+            ,limit: 5 //每页默认显示的数量
+            ,layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+            ,method: 'post'  //提交方式
+            ,request: {pageName: 'page', limitName: 'limit'}  // 要对应请求处理方法中的参数名称
+            ,cellMinWidth: 80
+            ,title: '我的收藏'
+            ,cols: [ [
+                {field:'cid', title:'收藏ID', width:100, sort:'true'}
+                ,{field:'pid', title:'商品编号', width:100}
+                ,{
+                    title:'商品图片',
+                    width:120,
+                    templet: function (d) {
+                        return '<img src="' + d.product.pfile + '" style="width: 50px; height: 50px;">';
+                    }
+                }
+                ,{
+                    title:'商品名称',
+                    width:200,
+                    templet: function (d) {
+                        return d.product.pname;
+                    }
+                }
+                ,{
+                    title:'商品价格',
+                    width:120,
+                    templet: function (d) {
+                        return '￥' + d.product.price;
+                    }
+                }
+                ,{fixed: 'right', title:'操作', toolbar: '#table-content-list', width:200}
+            ] ]
+        });
+    }
+</script>
+</body>
+</html>

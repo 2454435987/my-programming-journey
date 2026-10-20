@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.baidu.dao.UserMapper">
+
+    <!-- 用户 + 角色 联表映射 -->
+    <resultMap id="userRoleMap" type="com.baidu.pojo.User">
+
+        <id column="uid" property="uid"/>
+
+        <result column="name" property="name"/>
+        <result column="password" property="password"/>
+        <result column="telephone" property="telephone"/>
+        <result column="createTime" property="createTime"/>
+        <result column="role_id" property="roleId"/>
+        <result column="avatar" property="avatar"/>
+        <result column="email" property="email"/>
+        <result column="address" property="address"/>
+        <result column="status" property="status"/>
+
+        <!-- 用户与角色一对一关系 -->
+        <association property="role"
+                     javaType="com.baidu.pojo.Role">
+
+            <id property="rid" column="rid"/>
+
+            <result property="roleName"
+                    column="roleName"/>
+
+        </association>
+
+    </resultMap>
+
+
+    <!-- 根据用户主键和用户名分页查询 -->
+    <select id="getUserByPage"
+            resultMap="userRoleMap">
+
+        select
+        u.*,
+        r.rid,
+        r.roleName
+        from user u
+        left join role r
+        on u.role_id = r.rid
+
+        <where>
+
+
+
+            <!-- 用户名模糊查询 -->
+            <if test="name != null and name != ''">
+                and u.name like concat('%', #{name}, '%')
+            </if>
+
+        </where>
+
+        order by u.uid desc
+
+        limit #{start}, #{pageSize}
+
+    </select>
+
+
+    <!-- 计算分页总记录数 -->
+    <select id="myCount"
+            resultType="int">
+
+        select count(*)
+        from user u
+
+        <where>
+
+
+            <if test="name != null and name != ''">
+                and u.name like concat('%', #{name}, '%')
+            </if>
+
+        </where>
+
+    </select>
+
+</mapper>

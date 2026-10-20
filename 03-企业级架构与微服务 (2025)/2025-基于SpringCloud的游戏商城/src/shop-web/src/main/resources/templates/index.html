@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title th:text="${sysConfig != null and sysConfig.mallName != null ? sysConfig.mallName : '游戏商城'}">游戏商城</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <link rel="stylesheet" th:href="@{/layuiadmin/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/layuiadmin/style/admin.css}" media="all">
+    <link rel="stylesheet" th:href="@{/layuiadmin/style/template.css}" media="all">
+</head>
+<body>
+
+<div class="layui-fluid" id="LAY-component-nav" style="padding:0px;">
+    <!-- 引入公共顶部导航栏 -->
+    <div th:replace="~{navTop :: topNav(activeTab='home')}"></div>
+
+<!--轮播图-->
+    <div class="layui-row" style="margin-bottom:10px;">
+        <div class="layui-col-md10 layui-col-md-offset1">
+            <div class="layui-carousel" id="test-carousel-demo" lay-filter="test-carousel-demo">
+                <div carousel-item="">
+                    <!-- 第 1 张轮播图 (动态) -->
+                    <div th:if="${sysConfig != null and sysConfig.carousel1 != null and sysConfig.carousel1 != ''}" style="overflow: hidden; background-color: #111;">
+                        <div th:style="'position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; filter: blur(20px) brightness(0.6); transform: scale(1.1); background-image: url(' + ${sysConfig.carousel1} + ');'"></div>
+                        <img th:src="${sysConfig.carousel1}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;"/>
+                    </div>
+
+                    <!-- 第 2 张轮播图 (动态) -->
+                    <div th:if="${sysConfig != null and sysConfig.carousel2 != null and sysConfig.carousel2 != ''}" style="overflow: hidden; background-color: #111;">
+                        <div th:style="'position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; filter: blur(20px) brightness(0.6); transform: scale(1.1); background-image: url(' + ${sysConfig.carousel2} + ');'"></div>
+                        <img th:src="${sysConfig.carousel2}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;"/>
+                    </div>
+
+                    <!-- 第 3 张轮播图 (动态) -->
+                    <div th:if="${sysConfig != null and sysConfig.carousel3 != null and sysConfig.carousel3 != ''}" style="overflow: hidden; background-color: #111;">
+                        <div th:style="'position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; filter: blur(20px) brightness(0.6); transform: scale(1.1); background-image: url(' + ${sysConfig.carousel3} + ');'"></div>
+                        <img th:src="${sysConfig.carousel3}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;"/>
+                    </div>
+
+                    <!-- 第 4 张轮播图 (动态) -->
+                    <div th:if="${sysConfig != null and sysConfig.carousel4 != null and sysConfig.carousel4 != ''}" style="overflow: hidden; background-color: #111;">
+                        <div th:style="'position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; filter: blur(20px) brightness(0.6); transform: scale(1.1); background-image: url(' + ${sysConfig.carousel4} + ');'"></div>
+                        <img th:src="${sysConfig.carousel4}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;"/>
+                    </div>
+
+                    <!-- 第 5 张轮播图 (动态) -->
+                    <div th:if="${sysConfig != null and sysConfig.carousel5 != null and sysConfig.carousel5 != ''}" style="overflow: hidden; background-color: #111;">
+                        <div th:style="'position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; filter: blur(20px) brightness(0.6); transform: scale(1.1); background-image: url(' + ${sysConfig.carousel5} + ');'"></div>
+                        <img th:src="${sysConfig.carousel5}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;"/>
+                    </div>
+
+<!--                    &lt;!&ndash; 默认占位图（如果在后台没有配置任何轮播图则显示这个） &ndash;&gt;-->
+<!--                    <div th:if="${sysConfig == null or ((sysConfig.carousel1 == null or sysConfig.carousel1 == '') and (sysConfig.carousel2 == null or sysConfig.carousel2 == '') and (sysConfig.carousel3 == null or sysConfig.carousel3 == '') and (sysConfig.carousel4 == null or sysConfig.carousel4 == '') and (sysConfig.carousel5 == null or sysConfig.carousel5 == ''))}" style="overflow: hidden; background-color: #111;">-->
+<!--                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('/img/01.png'); background-size: cover; background-position: center; filter: blur(20px) brightness(0.6); transform: scale(1.1);"></div>-->
+<!--                        <img src="/img/01.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;"/>-->
+<!--                    </div>-->
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 引入自定义聚宝阁样式 -->
+    <style>
+        body {
+            background-color: #f8f9fa !important; /* 整体浅灰白背景 */
+            color: #333333;
+        }
+        .layui-card { background: transparent; }
+        
+        .jubaoge-item {
+            background: #ffffff; /* 纯白底色 */
+            border: 1px solid #e8e8e8; /* 浅灰边框 */
+            border-radius: 4px;
+            margin: 10px 5px 20px;
+            padding: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* 极弱的阴影 */
+        }
+        .jubaoge-item:hover {
+            border-color: #c59b27; /* 悬浮时变成高级暗金边框 */
+            box-shadow: 0 4px 20px rgba(197, 155, 39, 0.2); /* 暗金光晕 */
+            transform: translateY(-5px);
+        }
+        /* 顶部呼吸灯高光 */
+        .jubaoge-item::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #c59b27, transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .jubaoge-item:hover::before { opacity: 1; }
+        
+        .jubaoge-img-box {
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+            background: #ffffff;
+        }
+        .jubaoge-img-box img {
+            width: 100%;
+            height: 240px;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+        .jubaoge-item:hover .jubaoge-img-box img {
+            transform: scale(1.05);
+        }
+        
+        .jubaoge-info { padding: 15px 5px 5px; }
+        .jubaoge-title {
+            font-size: 18px;
+            color: #222222; /* 深黑色标题 */
+            font-weight: bold;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        .jubaoge-desc {
+            font-size: 13px;
+            color: #777777; /* 灰色描述 */
+            height: 36px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        .jubaoge-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px dashed #e8e8e8;
+            padding-top: 12px;
+        }
+        .jubaoge-price {
+            color: #c59b27; /* 暗金价格 */
+            font-size: 22px;
+            font-weight: bold;
+            font-family: 'Georgia', serif;
+        }
+        .jubaoge-price small { font-size: 14px; margin-right: 2px; }
+        
+        .jubaoge-fav {
+            color: #999999;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+        .jubaoge-fav:hover { color: #c59b27; }
+        
+        /* 修复深色背景下的分页组件 - 已在全局 navTop 中被覆盖，这里保留备用或删除 */
+        .layui-laypage a, .layui-laypage span {
+            background-color: #ffffff !important;
+            color: #555555 !important;
+            border-color: #e2e2e2 !important;
+        }
+        .layui-laypage .layui-laypage-curr .layui-laypage-em {
+            background-color: #c59b27 !important;
+        }
+    </style>
+
+<!--商品列表-->
+    <div class="layui-row">
+        <div class="layui-col-md10 layui-col-md-offset1">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md4 layui-col-sm6" th:each="product:${list}">
+                    <div class="jubaoge-item">
+                        <a th:href="@{/prod/getProdById/{id}(id=${product.pid})}">
+                            <div class="jubaoge-img-box">
+                                <img th:src="@{${product.pfile}}">
+                            </div>
+                        </a>
+                        <div class="jubaoge-info">
+                            <a th:href="@{/prod/getProdById/{id}(id=${product.pid})}" style="text-decoration: none;">
+                                <div class="jubaoge-title" th:text="${product.pname}">商品名称</div>
+                                <div class="jubaoge-desc" th:text="${product.description}">商品描述...</div>
+                            </a>
+                            <div class="jubaoge-price-row">
+                                <div class="jubaoge-price">
+                                    <small>￥</small><span th:text="${#numbers.formatDecimal(product.price, 1, 2)}"></span>
+                                </div>
+                                <div class="jubaoge-fav" th:onclick="'addFavorite(this, ' + ${product.pid} + ')'">
+                                    <i class="layui-icon" th:classappend="${product.isCollected} ? 'layui-icon-rate-solid' : 'layui-icon-rate'" th:style="${product.isCollected} ? 'color: #a855f7;' : ''"></i>
+                                    <span class="fav-count" th:text="${product.collectCount}" th:style="${product.isCollected} ? 'color: #a855f7;' : ''">0</span> 收藏
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--分页组件位置-->
+            <div class="layui-row" style="text-align: center; margin-top: 20px; margin-bottom: 40px;">
+                <div id="demo0"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <input type="hidden" id="current" th:value="${pages}">
+    <input type="hidden" id="totalCount" th:value="${totalCount}">
+
+</div>
+
+<script th:src="@{/layuiadmin/layui/layui.js}"></script>
+<script>
+
+    //获取从控制器发送过来的当前页与总记录数
+    var pages=document.getElementById("current").value;
+    var totalCount=document.getElementById("totalCount").value;
+
+
+    layui.config({
+        base: '/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'carousel', 'form','laypage', 'layer'], function () {
+        var carousel = layui.carousel
+            , form = layui.form;
+
+        //常规轮播
+        carousel.render({
+            elem: '#test-carousel-normal'
+            , arrow: 'always'
+        });
+
+        //改变下时间间隔、动画类型、高度
+        carousel.render({
+            elem: '#test-carousel-normal-2'
+            , interval: 1800
+            , anim: 'fade'
+            , height: '120px'
+        });
+
+        //设定各种参数
+        var ins3 = carousel.render({
+            elem: '#test-carousel-demo'
+        });
+        //图片轮播
+        carousel.render({
+            elem: '#test-carousel-demo'
+            , width: '100%'
+            , height: '550px'
+            , interval: 5000
+        });
+
+        //事件
+        carousel.on('change(test-carousel-demo)', function (res) {
+            console.log(res)
+        });
+
+        var $ = layui.$, active = {
+            set: function (othis) {
+                var THIS = 'layui-bg-normal'
+                    , key = othis.data('key')
+                    , options = {};
+
+                othis.css('background-color', '#5FB878').siblings().removeAttr('style');
+                options[key] = othis.data('value');
+                ins3.reload(options);
+            }
+        };
+
+        //分页组件
+        var laypage = layui.laypage
+            ,layer = layui.layer;
+
+        //总页数低于页码总数
+        laypage.render({
+            elem: 'demo0'
+            ,count: totalCount //数据总数
+            ,limit:6
+            ,curr: pages
+            ,jump: function (obj, first) { //obj为当前页的属性和方法，第一次加载first为true
+               // alert(obj.curr); //obj.curr表示当前页
+                if (!first) {	//非首次加载
+                    console.log(obj.curr); //obj.curr表示当前页
+                    location.href="/prod/index.html?currentPage="+obj.curr;
+                }
+            }
+        });
+
+        // 挂载到全局 window，供外部 onclick 调用
+        window.addFavorite = function(elem, pid) {
+            var icon = $(elem).find('i');
+            var countSpan = $(elem).find('.fav-count');
+            
+            $.post('/collect/toggle', {pid: pid}, function(res) {
+                if(res.code !== 0) {
+                    layer.msg(res.msg || '操作失败', {icon: 2});
+                    return;
+                }
+                
+                var isCollected = res.isCollected;
+                var currentCount = res.count;
+                
+                if (isCollected) {
+                    icon.removeClass('layui-icon-rate').addClass('layui-icon-rate-solid').css('color', '#a855f7');
+                    countSpan.text(currentCount).css('color', '#a855f7');
+                    layer.msg('收藏成功！', {icon: 1, time: 1000});
+                } else {
+                    icon.removeClass('layui-icon-rate-solid').addClass('layui-icon-rate').css('color', '');
+                    countSpan.text(currentCount).css('color', '');
+                    layer.msg('已取消收藏', {time: 1000});
+                }
+            });
+        };
+
+    });
+
+</script>
+</body>
+</html>

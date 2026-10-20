@@ -1,0 +1,145 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>系统设置</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" th:href="@{/layuiadmin/layui/css/layui.css}" href="/static/layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" th:href="@{/layuiadmin/style/admin.css}" href="/static/layuiadmin/style/admin.css" media="all">
+</head>
+
+<body>
+<div class="layui-fluid">
+  <div class="layui-card">
+    <div class="layui-card-header">系统基本配置</div>
+    <div class="layui-card-body" style="padding: 15px;">
+      <form class="layui-form" action="" lay-filter="component-form-group">
+        <input type="hidden" name="sid" th:value="${sysConfig.sid}">
+        
+        <div class="layui-form-item">
+          <label class="layui-form-label">商城名称</label>
+          <div class="layui-input-block">
+            <input type="text" name="mallName" th:value="${sysConfig.mallName}" lay-verify="required" autocomplete="off" placeholder="请输入商城名称" class="layui-input">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <label class="layui-form-label">轮播图1</label>
+          <div class="layui-input-inline" style="width: 400px;">
+            <input type="text" name="carousel1" id="carousel1" th:value="${sysConfig.carousel1}" autocomplete="off" placeholder="请输入轮播图1图片地址" class="layui-input">
+          </div>
+          <div class="layui-input-inline" style="width: auto;">
+            <button type="button" class="layui-btn layui-btn-primary carousel-upload-btn" data-target="carousel1"><i class="layui-icon layui-icon-upload"></i>上传图片</button>
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <label class="layui-form-label">轮播图2</label>
+          <div class="layui-input-inline" style="width: 400px;">
+            <input type="text" name="carousel2" id="carousel2" th:value="${sysConfig.carousel2}" autocomplete="off" placeholder="请输入轮播图2图片地址" class="layui-input">
+          </div>
+          <div class="layui-input-inline" style="width: auto;">
+            <button type="button" class="layui-btn layui-btn-primary carousel-upload-btn" data-target="carousel2"><i class="layui-icon layui-icon-upload"></i>上传图片</button>
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <label class="layui-form-label">轮播图3</label>
+          <div class="layui-input-inline" style="width: 400px;">
+            <input type="text" name="carousel3" id="carousel3" th:value="${sysConfig.carousel3}" autocomplete="off" placeholder="请输入轮播图3图片地址" class="layui-input">
+          </div>
+          <div class="layui-input-inline" style="width: auto;">
+            <button type="button" class="layui-btn layui-btn-primary carousel-upload-btn" data-target="carousel3"><i class="layui-icon layui-icon-upload"></i>上传图片</button>
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <label class="layui-form-label">轮播图4</label>
+          <div class="layui-input-inline" style="width: 400px;">
+            <input type="text" name="carousel4" id="carousel4" th:value="${sysConfig.carousel4}" autocomplete="off" placeholder="请输入轮播图4图片地址" class="layui-input">
+          </div>
+          <div class="layui-input-inline" style="width: auto;">
+            <button type="button" class="layui-btn layui-btn-primary carousel-upload-btn" data-target="carousel4"><i class="layui-icon layui-icon-upload"></i>上传图片</button>
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <label class="layui-form-label">轮播图5</label>
+          <div class="layui-input-inline" style="width: 400px;">
+            <input type="text" name="carousel5" id="carousel5" th:value="${sysConfig.carousel5}" autocomplete="off" placeholder="请输入轮播图5图片地址" class="layui-input">
+          </div>
+          <div class="layui-input-inline" style="width: auto;">
+            <button type="button" class="layui-btn layui-btn-primary carousel-upload-btn" data-target="carousel5"><i class="layui-icon layui-icon-upload"></i>上传图片</button>
+          </div>
+        </div>
+
+        <div class="layui-form-item layui-layout-admin">
+          <div class="layui-input-block">
+            <div class="layui-footer" style="left: 0;">
+              <button class="layui-btn" lay-submit="" lay-filter="component-form-submit">保存配置</button>
+              <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script th:src="@{/layuiadmin/layui/layui.js}" src="/static/layuiadmin/layui/layui.js"></script>
+<script>
+  layui.config({
+    base: '/layuiadmin/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use(['index', 'form', 'layer', 'upload'], function(){
+    var $ = layui.$
+    ,layer = layui.layer
+    ,upload = layui.upload
+    ,form = layui.form;
+    
+    // 渲染所有轮播图上传按钮
+    $('.carousel-upload-btn').each(function(){
+      var btn = $(this);
+      var targetId = btn.attr('data-target'); // 获取要填入的输入框ID
+      
+      upload.render({
+        elem: btn
+        ,url: '/upload' // 通用上传接口
+        ,accept: 'images'
+        ,done: function(res){
+          if(res.code == 0){
+            layer.msg('上传成功', {icon: 1, time: 1000});
+            // 自动回填到对应的输入框
+            $('#' + targetId).val(res.data);
+          } else {
+            layer.msg('上传失败', {icon: 2});
+          }
+        }
+        ,error: function(){
+          layer.msg('上传异常', {icon: 2});
+        }
+      });
+    });
+
+    /* 监听提交 */
+    form.on('submit(component-form-submit)', function(data){
+      $.ajax({
+        type: 'post',
+        url: '/sysConfig/doEdit',
+        data: data.field,
+        success: function(res){
+          if(res.code == '0'){
+            layer.msg('配置保存成功', {icon: 1, time: 1500});
+          }else{
+            layer.msg('配置保存失败', {icon: 2, time: 1500});
+          }
+        }
+      });
+      return false; // 阻止表单跳转
+    });
+  });
+</script>
+</body>
+</html>

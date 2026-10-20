@@ -1,0 +1,195 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>商品详情</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" th:href="@{/layuiadmin/layui/css/layui.css}" href="../../layuiadmin/layui/css/layui.css"
+          media="all">
+    <link rel="stylesheet" th:href="@{/layuiadmin/style/admin.css}" href="../../layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" th:href="@{/layuiadmin/style/template.css}" href="../../layuiadmin/style/template.css"
+          media="all">
+</head>
+<body>
+
+
+<div class="layui-fluid" id="LAY-component-nav" style="padding:0px;">
+    <div class="layui-row">
+        <!-- 引入公共顶部导航栏 -->
+        <div th:replace="~{navTop :: topNav(activeTab='home')}"></div>
+    </div>
+    <!--</div>-->
+
+    <div class="layui-row" style="margin-bottom:10px; margin-top:-20px;">
+        <div class="layui-col-md10 layui-col-md-offset1">
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="grid-demo">
+                        <div class="panel-body">
+                            <div class="media-body" style="background: #ffffff; width: 100%; height: 350px; display: flex; justify-content: center; align-items: center; border-radius: 5px; overflow: hidden; border: 1px solid #e2e2e2;">
+                                <img th:src="@{${product.pfile}}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="grid-demo">
+                        <div class="panel-body">
+                            <div class="media-body" style="padding-left: 30px; height:350px;">
+                                <div class="pad-btm" style="padding-top:10px; border-bottom: 1px dashed #e8e8e8; padding-bottom: 15px;">
+                                    <p class="fontColor">
+                                        <span style="color: #777777; font-size: 18px;">品名: </span>
+                                        <span style="color: #222222; font-size: 24px; font-weight: bold;"
+                                              th:text="${product.pname}"></span>
+                                    </p>
+                                </div>
+                                <div class="media" style="margin-top: 20px;">
+                                    <div class="media-right">
+                                        <span style="color: #777777; font-size: 18px;">估值: </span>
+                                        <span style="color: #c59b27; font-size: 24px; font-family: 'Georgia', serif; font-weight: bold;"
+                                              th:text="'￥' + ${#numbers.formatDecimal(product.price, 1, 2)}"></span>
+                                    </div>
+                                    <div class="media-left" style="margin-top: 25px; background: #fffbf0; padding: 15px; border-radius: 4px; border: 1px solid #f3e5c8;">
+                                        <span style="color: #c59b27; font-size: 16px; font-weight: bold;">背景描述: </span>
+                                        <p style="color: #555555; font-size: 14px; margin-top:10px; line-height: 1.6;">
+                                            <span th:text="${product.description}"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="media" style="margin-top: 30px;">
+                                    <div class="media-right" style="display: flex; gap: 15px;">
+                                        <!--添加商品到购物车-->
+                                        <a class="layui-btn layui-btn-primary" style="border-color: #c59b27; color: #c59b27; background: #ffffff; width: 120px;" th:href="@{/cart/addCart(pid=${product.pid})}">
+                                            <i class="layui-icon layui-icon-cart"></i> 加入货篓
+                                        </a>
+                                        <!--直接购买-->
+                                        <a class="layui-btn" style="background-color: #c59b27; color: #ffffff; width: 120px;" th:href="@{/order/buyDirect(pid=${product.pid})}">
+                                            <i class="layui-icon layui-icon-rmb"></i> 立即结缘
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- 评论区开始 -->
+    <div class="layui-row" style="margin-bottom:50px; margin-top:20px;">
+        <div class="layui-col-md10 layui-col-md-offset1">
+            <div class="layui-card" style="border: 1px solid #e2e2e2; background: #ffffff;">
+                <div class="layui-card-header" style="font-size: 18px; font-weight: bold; padding: 15px; color: #c59b27; border-bottom: 1px solid #e8e8e8;">群英评鉴</div>
+                <div class="layui-card-body">
+                    
+                    <!-- 发表评论表单 -->
+                    <div style="margin-bottom: 30px; padding: 20px; background: #fdfdfd; border: 1px solid #eeeeee; border-radius: 5px;">
+                        <h3 style="margin-bottom: 15px; color: #333333;">发表评价</h3>
+                        <div id="starRate"></div> <!-- 星级评分 -->
+                        <div class="layui-form-item layui-form-text" style="margin-top: 10px;">
+                            <textarea id="commentContent" placeholder="请输入您的评价内容（只有结缘并支付过的少侠才能评价哦）" class="layui-textarea" style="background: #ffffff; color: #333333; border-color: #e2e2e2;"></textarea>
+                        </div>
+                        <button type="button" class="layui-btn" style="background-color: #c59b27; color: #fff;" id="submitComment">提交评价</button>
+                    </div>
+
+                    <!-- 评论列表展示 -->
+                    <ul class="layui-timeline">
+                        <!-- 如果没有评论 -->
+                        <li class="layui-timeline-item" th:if="${#lists.isEmpty(comments)}">
+                            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                            <div class="layui-timeline-content layui-text">
+                                <h3 class="layui-timeline-title">暂无评价</h3>
+                                <p>这款宝贝还在等待它的第一个有缘人来点评...</p>
+                            </div>
+                        </li>
+                        
+                        <!-- 循环渲染评论 -->
+                        <li class="layui-timeline-item" th:each="c : ${comments}">
+                            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                            <div class="layui-timeline-content layui-text">
+                                <h3 class="layui-timeline-title">
+                                    <span th:text="${c.userName != null ? c.userName : '匿名用户'}">匿名用户</span>
+                                    <span style="font-size: 12px; color: #999; margin-left: 10px;" th:text="${#dates.format(c.createTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                                </h3>
+                                <!-- 静态展示星星 -->
+                                <div class="comment-star" th:data-score="${c.score}"></div>
+                                <p style="margin-top: 10px; font-size: 14px;" th:text="${c.content}"></p>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 评论区结束 -->
+
+    <script th:src="@{/layuiadmin/layui/layui.js}" src="../../layuiadmin/layui/layui.js"></script>
+    <script th:inline="javascript">
+        var pid = [[${product.pid}]]; // 获取商品ID
+        
+        layui.config({
+            base: '/layuiadmin/' //静态资源所在路径
+        }).extend({
+            index: 'lib/index' //主入口模块
+        }).use(['index', 'rate', 'jquery', 'layer'], function(){
+            var rate = layui.rate;
+            var $ = layui.jquery;
+            var layer = layui.layer;
+            var currentScore = 5; // 默认5星
+            
+            // 渲染打分的星星
+            rate.render({
+                elem: '#starRate',
+                value: 5,
+                text: true,
+                setText: function(value){
+                    var arrs = {'1': '极差', '2': '差', '3': '中等', '4': '好', '5': '极好'};
+                    this.span.text(arrs[value] || ( value + "星"));
+                },
+                choose: function(value){
+                    currentScore = value;
+                }
+            });
+            
+            // 渲染评论列表中只读的星星
+            $('.comment-star').each(function(){
+                var score = $(this).data('score');
+                rate.render({
+                    elem: this,
+                    value: score,
+                    readonly: true
+                });
+            });
+
+            // 提交评论事件
+            $('#submitComment').on('click', function(){
+                var content = $('#commentContent').val();
+                if($.trim(content) === ''){
+                    layer.msg('评价内容不能为空哦', {icon: 5});
+                    return;
+                }
+                
+                // 发起Ajax请求
+                $.post('/comment/doAdd', {
+                    pid: pid,
+                    content: content,
+                    score: currentScore
+                }, function(res){
+                    if(res.code === 0){
+                        layer.msg(res.msg, {icon: 1, time: 1000}, function(){
+                            location.reload(); // 评论成功后刷新页面
+                        });
+                    } else {
+                        layer.msg(res.msg, {icon: 2});
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

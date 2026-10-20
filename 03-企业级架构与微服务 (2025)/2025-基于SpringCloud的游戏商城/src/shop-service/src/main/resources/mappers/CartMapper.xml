@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.dao.CartMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.baidu.pojo.Cart">
+        <id column="cid" property="cid" />
+        <result column="pid" property="pid" />
+        <result column="pquantity" property="pquantity" />
+        <result column="uid" property="uid" />
+    </resultMap>
+
+    <resultMap id="cartMap" type="Cart">
+        <result property="cid" column="cid"/>
+        <result property="pquantity" column="pquantity"/>
+
+        <!--配置购物车到商品的一对一关联关系的映射-->
+        <association property="product" javaType="Product">
+            <result property="pid" column="pid"/>
+            <result property="pname" column="pname"/>
+            <result property="price" column="price"/>
+        </association>
+
+        <!--配置购物车到用户的一对一关联关系的映射-->
+        <association property="user" javaType="User">
+            <result property="uid" column="uid"/>
+            <result property="name" column="name"/>
+            <result property="telephone" column="telephone"/>
+        </association>
+    </resultMap>
+
+<!--    &lt;!&ndash; 查询所有人的购物车数据（带关联商品和用户） &ndash;&gt;-->
+<!--    <select id="getAllCartPage" resultMap="cartMap">-->
+<!--        SELECT-->
+<!--        c.cid, c.pquantity, p.pid, p.pname, p.price, u.uid, u.name, u.telephone-->
+<!--        FROM cart c, t_product p, USER u-->
+<!--        WHERE c.uid = u.uid AND c.pid = p.pid-->
+<!--        <if test="pname != null and pname != ''">-->
+<!--            AND p.pname LIKE CONCAT("%", #{pname}, "%")-->
+<!--        </if>-->
+<!--        LIMIT #{start}, #{pageSize}-->
+<!--    </select>-->
+
+    <!--根据用户主键和商品名称进行模糊分页查询和普通分页查询-->
+    <select id="getCartPageByUidAndPname" resultMap="cartMap">
+        SELECT
+        c.cid,c.pquantity,p.pid,p.pname,p.price,u.uid,u.name,u.telephone
+        FROM cart c,t_product p,USER u
+        WHERE c.uid=u.uid AND c.pid=p.pid
+        <if test="uid!=null">
+            AND u.uid=#{uid}
+        </if>
+        <if test="pname!=null">
+            AND p.pname LIKE CONCAT("%",#{pname},"%")
+        </if>
+        LIMIT #{start},#{pageSize}
+    </select>
+
+    <!--计算普通分页与模糊分页的总记录数-->
+    <select id="myCount" resultType="int">
+        SELECT COUNT(*)
+        FROM cart c,t_product p,USER u
+        WHERE c.uid=u.uid AND c.pid=p.pid
+        <if test="uid!=null">
+          AND u.uid=#{uid}
+        </if>
+        <if test="pname!=null">
+            AND p.pname LIKE CONCAT("%",#{pname},"%")
+        </if>
+    </select>
+</mapper>
